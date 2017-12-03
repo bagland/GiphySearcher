@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 extension IndicatableView where Self: UIViewController {
   func showNotReachableMessage(tryAgainCompletion: @escaping(() -> Void)) {
@@ -28,6 +29,19 @@ extension IndicatableView where Self: UIViewController {
         self.view.layoutIfNeeded()
       })
     }
+  }
+  
+  func showLoading() {
+    HUD.show(.progress)
+  }
+  
+  func hideLoading() {
+    HUD.hide()
+  }
+  
+  func showError(message: String) {
+    HUD.show(.labeledError(title: "Ошибка", subtitle: message), onView: self.view)
+    HUD.hide(afterDelay: 2.0)
   }
 }
 

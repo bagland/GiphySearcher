@@ -23,10 +23,14 @@ class HomeRouter: HomeWireframeProtocol {
     let presenter = HomePresenter(interface: view, interactor: interactor, router: router)
     
     view.presenter = presenter
-    interactor.presenter = presenter
     router.viewController = view
     
     let navVC = UINavigationController(rootViewController: view)
     return navVC
+  }
+  
+  func showGifDetails(giphy: GiphyEntity) {
+    let gifDetails = GifDetailRouter.createModule(giphy: giphy)
+    viewController?.present(gifDetails, animated: true, completion: nil)
   }
 }

@@ -13,7 +13,7 @@ import RxSwift
 
 //MARK: Wireframe -
 protocol HomeWireframeProtocol: class {
-  
+  func showGifDetails(giphy: GiphyEntity)
 }
 //MARK: Presenter -
 protocol HomePresenterProtocol: class {
@@ -21,19 +21,11 @@ protocol HomePresenterProtocol: class {
   var interactor: HomeInteractorInputProtocol? { get set }
   
   func bindSearchBar(_ searchBar: UISearchBar)
-}
-
-//MARK: Interactor -
-protocol HomeInteractorOutputProtocol: class {
-  
-  /* Interactor -> Presenter */
+  func selectedGiphyAt(index: Int)
 }
 
 protocol HomeInteractorInputProtocol: class {
   
-  var presenter: HomeInteractorOutputProtocol?  { get set }
-  
-  /* Presenter -> Interactor */
   func searchGiphyWithQuery(_ query: String) -> Observable<[GiphyEntity]>
 }
 

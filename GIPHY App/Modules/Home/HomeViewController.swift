@@ -40,7 +40,6 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
   }
   
   private func initViews() {
-    navigationItem.title = Constants.NavigationTitles.home
     searchBar.placeholder = "Введите слово"
     searchBar.autocapitalizationType = .none
     searchBar.delegate = self
@@ -83,6 +82,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
   }
   
   func setInitialState() {
+    self.presentationItems.removeAll()
+    collectionView.reloadData()
     emptyView.isHidden = false
     resultLabel.text = Constants.startSearching
   }
@@ -121,6 +122,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     searchBar.resignFirstResponder()
+    presenter?.selectedGiphyAt(index: indexPath.row)
   }
   
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

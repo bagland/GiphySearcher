@@ -18,7 +18,6 @@ class GiphyEntity: Mappable {
   var originalImgUrl: String?
   var source: String?
   
-  
   required init?(map: Map) {
     
   }

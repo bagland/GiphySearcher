@@ -9,11 +9,8 @@
 import Foundation
 
 protocol IndicatableView: class {
-//  func showActivityIndicator()
-//  func showError(with message: String)
-//  func showNetworkError()
-//  func hideActivityIndicator()
-//  func hideActivityIndicatorWith(completion: @escaping() -> Void)
-//  func showMessage(_ message: String)
   func showNotReachableMessage(tryAgainCompletion: @escaping(() -> Void))
+  func showLoading()
+  func hideLoading()
+  func showError(message: String)
 }

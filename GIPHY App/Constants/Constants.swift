@@ -14,6 +14,7 @@ struct Constants {
   static let apiKey = "ctYbteKLquNLZroTgnjkpA6orhWyCm23"
   static let startSearching = "Начните поиск 😉"
   static let nothingFound = "По вашему запросу ничего не найдено 😔"
+  static let unknownError = "Неизвестная ошибка"
   
   struct NavigationTitles {
     static let home = "Home"

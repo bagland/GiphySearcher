@@ -22,12 +22,13 @@ struct CellPresentation {
   }
 }
 
-class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
+class HomePresenter: HomePresenterProtocol {
   
   weak private var view: HomeViewProtocol?
   var interactor: HomeInteractorInputProtocol?
   private let router: HomeWireframeProtocol
   let disposeBag = DisposeBag()
+  var giphyEntities: [GiphyEntity]!
   
   init(interface: HomeViewProtocol, interactor: HomeInteractorInputProtocol?, router: HomeWireframeProtocol) {
     self.view = interface
@@ -53,6 +54,7 @@ class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
         return self.interactor!.searchGiphyWithQuery(query)
       }
       .subscribe(onNext: { (giphyEntities) in
+        self.giphyEntities = giphyEntities
         let presentationItems = giphyEntities.map({ (giphy) -> CellPresentation in
           return CellPresentation(name: giphy.title!, imgUrl: giphy.smallImgUrl!)
         })
@@ -60,8 +62,14 @@ class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
         if giphyEntities.count == 0 {
           self.view?.setNothingFoundState()
         }
+      }, onError: { (error) in
+        debugPrint(error)
       })
       .disposed(by: disposeBag)
+  }
+  
+  func selectedGiphyAt(index: Int) {
+    router.showGifDetails(giphy: giphyEntities[index])
   }
   
 }
