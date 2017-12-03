@@ -42,10 +42,11 @@ class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
       .debounce(0.4, scheduler: MainScheduler.instance)
       .filter { (text) -> Bool in
         if text.isEmpty {
-          // show input state
+          self.view?.setInitialState()
           return false
         }
         // show loading state
+        self.view?.setLoadingState()
         return true
       }
       .flatMapLatest { (query) -> Observable<[GiphyEntity]> in
@@ -56,6 +57,9 @@ class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
           return CellPresentation(name: giphy.title!, imgUrl: giphy.smallImgUrl!)
         })
         self.view?.updateWithItems(presentationItems)
+        if giphyEntities.count == 0 {
+          self.view?.setNothingFoundState()
+        }
       })
       .disposed(by: disposeBag)
   }

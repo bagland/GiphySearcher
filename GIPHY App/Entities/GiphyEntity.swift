@@ -11,7 +11,7 @@ import ObjectMapper
 
 class GiphyEntity: Mappable {
   
-  var ID: Int!
+  var ID: String!
   var title: String?
   var type: String?
   var smallImgUrl: String?

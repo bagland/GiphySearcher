@@ -44,4 +44,7 @@ protocol HomeViewProtocol: IndicatableView {
   
   /* Presenter -> ViewController */
   func updateWithItems(_ items: [CellPresentation])
+  func setLoadingState()
+  func setInitialState()
+  func setNothingFoundState()
 }

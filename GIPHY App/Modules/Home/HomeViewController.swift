@@ -9,16 +9,20 @@
 //
 
 import UIKit
+import SwiftGifOrigin
 
-class HomeViewController: UIViewController, HomeViewProtocol {
+class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtocol {
   
   @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var resultLabel: UILabel!
+  @IBOutlet weak var emptyView: UIView!
   
   var presenter: HomePresenterProtocol?
   
   let cellIdentifier = "HomeCell"
-  fileprivate let searchBar = UISearchBar()
-  var presentationItems = [CellPresentation]() {
+  private let searchBar = UISearchBar()
+  private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+  fileprivate var presentationItems = [CellPresentation]() {
     didSet {
       collectionView.reloadData()
     }
@@ -31,22 +35,61 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     presenter?.bindSearchBar(searchBar)
   }
   
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
   private func initViews() {
     navigationItem.title = Constants.NavigationTitles.home
     searchBar.placeholder = "Введите слово"
     searchBar.autocapitalizationType = .none
+    searchBar.delegate = self
     navigationItem.titleView = searchBar
-    
+    configureIndicator()
+    configureCollectionView()
+  }
+  
+  private func configureIndicator() {
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    searchBar.addSubview(activityIndicator)
+    activityIndicator.rightAnchor.constraint(equalTo: searchBar.rightAnchor, constant: -44.0).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor).isActive = true
+  }
+  
+  private func configureCollectionView() {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.register(UINib.init(nibName: "HomeCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
     collectionView.contentInset = UIEdgeInsetsMake(1.0, 1.0, 1.0, 1.0)
+    collectionView.keyboardDismissMode = .onDrag
   }
   
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+      return
+    }
+    flowLayout.invalidateLayout()
+  }
   
   // MARK: - HomeViewProtocol
   func updateWithItems(_ items: [CellPresentation]) {
     self.presentationItems = items
+    activityIndicator.stopAnimating()
+  }
+  
+  func setLoadingState() {
+    emptyView.isHidden = true
+    activityIndicator.startAnimating()
+  }
+  
+  func setInitialState() {
+    emptyView.isHidden = false
+    resultLabel.text = Constants.startSearching
+  }
+  
+  func setNothingFoundState() {
+    emptyView.isHidden = false
+    resultLabel.text = Constants.nothingFound
   }
 }
 
@@ -71,9 +114,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HomeCell
     let item = presentationItems[indexPath.row]
-    cell.titleLabel.text = item.name
-    
+    cell.cellPresentation = item
+    cell.updateViews()
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    searchBar.resignFirstResponder()
+  }
+  
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height {
+      debugPrint("Need to load more?")
+    }
   }
   
 }
