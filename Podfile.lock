@@ -1,0 +1,35 @@
+PODS:
+  - Alamofire (4.5.1)
+  - ObjectMapper (3.1.0)
+  - PKHUD (4.2.3)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - ObjectMapper
+  - PKHUD (from `https://github.com/pkluz/PKHUD.git`, branch `release/swift4`)
+  - RxCocoa
+  - RxSwift
+
+EXTERNAL SOURCES:
+  PKHUD:
+    :branch: release/swift4
+    :git: https://github.com/pkluz/PKHUD.git
+
+CHECKOUT OPTIONS:
+  PKHUD:
+    :commit: 4d8fbf70ae912dd72280cde0a5c1440ada9a7306
+    :git: https://github.com/pkluz/PKHUD.git
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  PKHUD: 351011b853e6b942e7ee8ad335864cc84c787241
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+
+PODFILE CHECKSUM: c452019efc56f53e1c5fee1d9850ce4dc900be96
+
+COCOAPODS: 1.3.1
