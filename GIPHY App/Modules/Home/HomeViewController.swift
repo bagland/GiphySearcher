@@ -36,6 +36,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    dismissKeyboard()
+  }
+  
+  @objc private func dismissKeyboard() {
     searchBar.resignFirstResponder()
   }
   
@@ -46,6 +50,9 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
     navigationItem.titleView = searchBar
     configureIndicator()
     configureCollectionView()
+    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    emptyView.addGestureRecognizer(tap)
+    emptyView.isUserInteractionEnabled = true
   }
   
   private func configureIndicator() {
