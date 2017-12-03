@@ -28,6 +28,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
     }
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .default
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -45,6 +49,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
   
   private func initViews() {
     searchBar.placeholder = "Введите слово"
+    let searchTextField = searchBar.value(forKey: "searchField") as? UITextField
+    searchTextField?.layer.borderWidth = 1.0
+    searchTextField?.layer.borderColor = UIColor.lightGray.cgColor
+    searchTextField?.layer.cornerRadius = 3.0
     searchBar.autocapitalizationType = .none
     searchBar.delegate = self
     navigationItem.titleView = searchBar
