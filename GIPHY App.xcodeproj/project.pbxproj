@@ -22,6 +22,9 @@
 		86B6F1F21FD4015700ED08DD /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F1F11FD4015700ED08DD /* ToastView.swift */; };
 		86B6F1F51FD402FF00ED08DD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F1F41FD402FF00ED08DD /* Constants.swift */; };
 		86B6F1F81FD42B4000ED08DD /* GiphyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F1F71FD42B4000ED08DD /* GiphyService.swift */; };
+		86B6F1FB1FD42D6E00ED08DD /* GiphyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F1FA1FD42D6E00ED08DD /* GiphyEntity.swift */; };
+		86B6F1FF1FD43C8000ED08DD /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F1FD1FD43C8000ED08DD /* HomeCell.swift */; };
+		86B6F2001FD43C8000ED08DD /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86B6F1FE1FD43C8000ED08DD /* HomeCell.xib */; };
 		A85896A6DDCC19612D327EB5 /* Pods_GIPHY_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AE497FDBBF5B4AEDAD056 /* Pods_GIPHY_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,9 @@
 		86B6F1F11FD4015700ED08DD /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		86B6F1F41FD402FF00ED08DD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		86B6F1F71FD42B4000ED08DD /* GiphyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyService.swift; sourceTree = "<group>"; };
+		86B6F1FA1FD42D6E00ED08DD /* GiphyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyEntity.swift; sourceTree = "<group>"; };
+		86B6F1FD1FD43C8000ED08DD /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		86B6F1FE1FD43C8000ED08DD /* HomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		F45AE497FDBBF5B4AEDAD056 /* Pods_GIPHY_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GIPHY_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -84,6 +90,7 @@
 				867FA8DC1FD3EE5F00E0A25E /* Application */,
 				86B6F1F31FD402F400ED08DD /* Constants */,
 				86B6F1F01FD4014100ED08DD /* Custom Views */,
+				86B6F1F91FD42D5600ED08DD /* Entities */,
 				86B1BA131FD3FFCC00EACDD0 /* Extensions */,
 				867FA8DD1FD3EE6900E0A25E /* Modules */,
 				86B1BA101FD3FF2D00EACDD0 /* Protocols */,
@@ -115,6 +122,7 @@
 		867FA8DE1FD3EE8C00E0A25E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				86B6F1FC1FD43C6000ED08DD /* HomeCell */,
 				86B1B9FF1FD3F47A00EACDD0 /* HomeInteractor.swift */,
 				86B1BA001FD3F47A00EACDD0 /* HomePresenter.swift */,
 				86B1BA011FD3F47A00EACDD0 /* HomeProtocols.swift */,
@@ -163,6 +171,23 @@
 				86B6F1F71FD42B4000ED08DD /* GiphyService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		86B6F1F91FD42D5600ED08DD /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				86B6F1FA1FD42D6E00ED08DD /* GiphyEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		86B6F1FC1FD43C6000ED08DD /* HomeCell */ = {
+			isa = PBXGroup;
+			children = (
+				86B6F1FD1FD43C8000ED08DD /* HomeCell.swift */,
+				86B6F1FE1FD43C8000ED08DD /* HomeCell.xib */,
+			);
+			path = HomeCell;
 			sourceTree = "<group>";
 		};
 		B1DDBD0DE2EC0C5DA29A8535 /* Pods */ = {
@@ -248,6 +273,7 @@
 				867FA8D21FD3ED6A00E0A25E /* Assets.xcassets in Resources */,
 				867FA8D01FD3ED6A00E0A25E /* Main.storyboard in Resources */,
 				86B1BA0C1FD3FCD600EACDD0 /* HomeStoryboard.storyboard in Resources */,
+				86B6F2001FD43C8000ED08DD /* HomeCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +352,8 @@
 				86B6F1F81FD42B4000ED08DD /* GiphyService.swift in Sources */,
 				86B1BA121FD3FF3C00EACDD0 /* Protocols.swift in Sources */,
 				867FA8CB1FD3ED6900E0A25E /* AppDelegate.swift in Sources */,
+				86B6F1FF1FD43C8000ED08DD /* HomeCell.swift in Sources */,
+				86B6F1FB1FD42D6E00ED08DD /* GiphyEntity.swift in Sources */,
 				86B6F1F51FD402FF00ED08DD /* Constants.swift in Sources */,
 				86B1BA051FD3F47A00EACDD0 /* HomeInteractor.swift in Sources */,
 				86B1BA081FD3F47A00EACDD0 /* HomeRouter.swift in Sources */,

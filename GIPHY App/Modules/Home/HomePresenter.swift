@@ -10,13 +10,24 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
+struct CellPresentation {
+  var name: String
+  var imgUrl: String
+  
+  init(name: String, imgUrl: String) {
+    self.name = name
+    self.imgUrl = imgUrl
+  }
+}
 
 class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
   
   weak private var view: HomeViewProtocol?
   var interactor: HomeInteractorInputProtocol?
   private let router: HomeWireframeProtocol
+  let disposeBag = DisposeBag()
   
   init(interface: HomeViewProtocol, interactor: HomeInteractorInputProtocol?, router: HomeWireframeProtocol) {
     self.view = interface
@@ -24,8 +35,29 @@ class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
     self.router = router
   }
   
-  func viewDidLoad() {
-    
+  func bindSearchBar(_ searchBar: UISearchBar) {
+    searchBar.rx.text
+      .orEmpty
+      .asObservable()
+      .debounce(0.4, scheduler: MainScheduler.instance)
+      .filter { (text) -> Bool in
+        if text.isEmpty {
+          // show input state
+          return false
+        }
+        // show loading state
+        return true
+      }
+      .flatMapLatest { (query) -> Observable<[GiphyEntity]> in
+        return self.interactor!.searchGiphyWithQuery(query)
+      }
+      .subscribe(onNext: { (giphyEntities) in
+        let presentationItems = giphyEntities.map({ (giphy) -> CellPresentation in
+          return CellPresentation(name: giphy.title!, imgUrl: giphy.smallImgUrl!)
+        })
+        self.view?.updateWithItems(presentationItems)
+      })
+      .disposed(by: disposeBag)
   }
   
 }

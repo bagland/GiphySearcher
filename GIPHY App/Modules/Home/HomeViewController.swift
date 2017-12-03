@@ -12,25 +12,68 @@ import UIKit
 
 class HomeViewController: UIViewController, HomeViewProtocol {
   
+  @IBOutlet weak var collectionView: UICollectionView!
+  
   var presenter: HomePresenterProtocol?
   
+  let cellIdentifier = "HomeCell"
   fileprivate let searchBar = UISearchBar()
+  var presentationItems = [CellPresentation]() {
+    didSet {
+      collectionView.reloadData()
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     initViews()
-    presenter?.viewDidLoad()
+    presenter?.bindSearchBar(searchBar)
   }
   
   private func initViews() {
     navigationItem.title = Constants.NavigationTitles.home
-    if #available(iOS 11.0, *) {
-      navigationController?.navigationBar.prefersLargeTitles = true
-    }
     searchBar.placeholder = "Введите слово"
     searchBar.autocapitalizationType = .none
     navigationItem.titleView = searchBar
+    
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.register(UINib.init(nibName: "HomeCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+    collectionView.contentInset = UIEdgeInsetsMake(1.0, 1.0, 1.0, 1.0)
+  }
+  
+  
+  // MARK: - HomeViewProtocol
+  func updateWithItems(_ items: [CellPresentation]) {
+    self.presentationItems = items
+  }
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let fullWidth = view.frame.width
+    let spacing: CGFloat = 1.0
+    return CGSize(
+      width: fullWidth / 3.0 - 2 * spacing,
+      height: fullWidth / 3.0 - 2 * spacing
+    )
+  }
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return presentationItems.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HomeCell
+    let item = presentationItems[indexPath.row]
+    cell.titleLabel.text = item.name
+    
+    return cell
   }
   
 }

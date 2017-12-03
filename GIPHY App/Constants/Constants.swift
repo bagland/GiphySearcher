@@ -11,6 +11,7 @@ import Foundation
 struct Constants {
   static let noInternet = "Нет интернета"
   static let tryAgain = "Попробуйте заново"
+  static let apiKey = "ctYbteKLquNLZroTgnjkpA6orhWyCm23"
   
   struct NavigationTitles {
     static let home = "Home"

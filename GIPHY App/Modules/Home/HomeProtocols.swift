@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import RxSwift
 
 //MARK: Wireframe -
 protocol HomeWireframeProtocol: class {
@@ -19,7 +20,7 @@ protocol HomePresenterProtocol: class {
   
   var interactor: HomeInteractorInputProtocol? { get set }
   
-  func viewDidLoad()
+  func bindSearchBar(_ searchBar: UISearchBar)
 }
 
 //MARK: Interactor -
@@ -33,6 +34,7 @@ protocol HomeInteractorInputProtocol: class {
   var presenter: HomeInteractorOutputProtocol?  { get set }
   
   /* Presenter -> Interactor */
+  func searchGiphyWithQuery(_ query: String) -> Observable<[GiphyEntity]>
 }
 
 //MARK: View -
@@ -41,4 +43,5 @@ protocol HomeViewProtocol: IndicatableView {
   var presenter: HomePresenterProtocol?  { get set }
   
   /* Presenter -> ViewController */
+  func updateWithItems(_ items: [CellPresentation])
 }

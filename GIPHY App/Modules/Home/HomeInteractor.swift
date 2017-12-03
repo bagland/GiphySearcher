@@ -9,8 +9,27 @@
 //
 
 import UIKit
+import RxSwift
+
 
 class HomeInteractor: HomeInteractorInputProtocol {
   
   weak var presenter: HomeInteractorOutputProtocol?
+  
+  func searchGiphyWithQuery(_ query: String) -> Observable<[GiphyEntity]> {
+    return Observable.create({ (observer) -> Disposable in
+      let request = GiphyService.searchForQuery(query, offset: nil, completion: { (networkResult) in
+        switch networkResult {
+        case .Success(let giphyArray):
+          observer.onNext(giphyArray)
+          
+        case .Failure(let error):
+          break
+        }
+      })
+      return Disposables.create {
+        request.cancel()
+      }
+    })
+  }
 }
