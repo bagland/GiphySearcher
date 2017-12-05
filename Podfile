@@ -12,4 +12,5 @@ target 'GIPHY App' do
   pod 'RxCocoa'
   pod 'PKHUD', :git => 'https://github.com/pkluz/PKHUD.git', :branch => 'release/swift4'
   pod 'SwiftGifOrigin', '~> 1.6.1'
+  pod 'FMDB'
 end

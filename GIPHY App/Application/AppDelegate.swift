@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = HomeRouter.createModule()
+    if !DatabaseManager.shared.dbExists() {
+      _ = DatabaseManager.shared.createDatabase()
+    }
     return true
   }
   

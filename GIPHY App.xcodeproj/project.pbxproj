@@ -31,6 +31,7 @@
 		86B6F20B1FD4703B00ED08DD /* GifDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F2051FD4703B00ED08DD /* GifDetailRouter.swift */; };
 		86B6F20C1FD4703B00ED08DD /* GifDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F2061FD4703B00ED08DD /* GifDetailViewController.swift */; };
 		86B6F20F1FD49E4C00ED08DD /* GifDetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86B6F20E1FD49E4C00ED08DD /* GifDetailStoryboard.storyboard */; };
+		86B6F21F1FD5DD8F00ED08DD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B6F21E1FD5DD8F00ED08DD /* DatabaseManager.swift */; };
 		A85896A6DDCC19612D327EB5 /* Pods_GIPHY_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AE497FDBBF5B4AEDAD056 /* Pods_GIPHY_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		86B6F2051FD4703B00ED08DD /* GifDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifDetailRouter.swift; sourceTree = "<group>"; };
 		86B6F2061FD4703B00ED08DD /* GifDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifDetailViewController.swift; sourceTree = "<group>"; };
 		86B6F20E1FD49E4C00ED08DD /* GifDetailStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GifDetailStoryboard.storyboard; sourceTree = "<group>"; };
+		86B6F21E1FD5DD8F00ED08DD /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		F45AE497FDBBF5B4AEDAD056 /* Pods_GIPHY_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GIPHY_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 		86B6F1F61FD42B3000ED08DD /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				86B6F21E1FD5DD8F00ED08DD /* DatabaseManager.swift */,
 				86B6F1F71FD42B4000ED08DD /* GiphyService.swift */,
 			);
 			path = Service;
@@ -348,6 +351,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GIPHY App/Pods-GIPHY App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -357,6 +361,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -380,6 +385,7 @@
 				86B6F20A1FD4703B00ED08DD /* GifDetailProtocols.swift in Sources */,
 				86B6F2091FD4703B00ED08DD /* GifDetailPresenter.swift in Sources */,
 				86B1BA151FD3FFED00EACDD0 /* IndicatableViewExtension.swift in Sources */,
+				86B6F21F1FD5DD8F00ED08DD /* DatabaseManager.swift in Sources */,
 				86B1BA061FD3F47A00EACDD0 /* HomePresenter.swift in Sources */,
 				86B6F1F81FD42B4000ED08DD /* GiphyService.swift in Sources */,
 				86B1BA121FD3FF3C00EACDD0 /* Protocols.swift in Sources */,

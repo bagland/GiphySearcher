@@ -87,6 +87,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, HomeViewProtoco
   
   // MARK: - HomeViewProtocol
   func updateWithItems(_ items: [CellPresentation]) {
+    emptyView.isHidden = true
     self.presentationItems = items
     activityIndicator.stopAnimating()
   }

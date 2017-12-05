@@ -25,8 +25,14 @@ protocol HomePresenterProtocol: class {
 }
 
 protocol HomeInteractorInputProtocol: class {
+  var presenter: HomeInteractorOutputProtocol? { get set }
   
   func searchGiphyWithQuery(_ query: String) -> Observable<[GiphyEntity]>
+}
+
+protocol HomeInteractorOutputProtocol: class {
+  
+  func gotError(error: Error)
 }
 
 //MARK: View -

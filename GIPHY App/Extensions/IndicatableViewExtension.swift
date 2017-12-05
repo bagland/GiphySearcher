@@ -10,23 +10,29 @@ import UIKit
 import PKHUD
 
 extension IndicatableView where Self: UIViewController {
-  func showNotReachableMessage(tryAgainCompletion: @escaping(() -> Void)) {
+  func showNotReachableMessage() {
     let height: CGFloat = 60.0
-    let botPadding: CGFloat = 8.0
-    let toastView = ToastView(message: Constants.noInternet, image: nil, showButton: true)
-    toastView.tryAgainCompletion = tryAgainCompletion
+    let animationDuration = 0.5
+    let toastView = ToastView(message: Constants.noInternet, image: nil, showButton: false)
     toastView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(toastView)
     toastView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
     toastView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16.0).isActive = true
     toastView.heightAnchor.constraint(equalToConstant: height).isActive = true
-    toastView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: height).isActive = true
-    UIView.animate(withDuration: 0.0, animations: {
+    let topAnchor = toastView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: -(height))
+    topAnchor.isActive = true
+    view.layoutIfNeeded()
+    UIView.animate(withDuration: animationDuration, animations: { [unowned self] in
+      topAnchor.constant += (height + 8.0)
       self.view.layoutIfNeeded()
     }) { (_) in
-      toastView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -botPadding).isActive = true
-      UIView.animate(withDuration: 0.5, animations: {
-        self.view.layoutIfNeeded()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        UIView.animate(withDuration: animationDuration, animations: { [unowned self] in
+          topAnchor.constant -= (height + 8.0)
+          self.view.layoutIfNeeded()
+          }, completion: { (_) in
+            toastView.removeFromSuperview()
+        })
       })
     }
   }

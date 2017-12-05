@@ -22,7 +22,7 @@ struct CellPresentation {
   }
 }
 
-class HomePresenter: HomePresenterProtocol {
+class HomePresenter: HomePresenterProtocol, HomeInteractorOutputProtocol {
   
   weak private var view: HomeViewProtocol?
   var interactor: HomeInteractorInputProtocol?
@@ -62,8 +62,6 @@ class HomePresenter: HomePresenterProtocol {
         if giphyEntities.count == 0 {
           self.view?.setNothingFoundState()
         }
-      }, onError: { (error) in
-        debugPrint(error)
       })
       .disposed(by: disposeBag)
   }
@@ -72,4 +70,20 @@ class HomePresenter: HomePresenterProtocol {
     router.showGifDetails(giphy: giphyEntities[index])
   }
   
+  func gotError(error: Error) {
+    view?.setNothingFoundState()
+    if let giphyError = error as? GiphyError {
+      switch giphyError {
+      case .NoNetworkError:
+        debugPrint("NO NETWORK")
+        view?.showNotReachableMessage()
+      case .ResponseError:
+        debugPrint("RESPONSE ERROR")
+        view?.showError(message: "RESPONSE ERROR")
+      }
+    } else {
+      debugPrint(error)
+      view?.showError(message: error.localizedDescription)
+    }
+  }
 }

@@ -23,6 +23,7 @@ class HomeRouter: HomeWireframeProtocol {
     let presenter = HomePresenter(interface: view, interactor: interactor, router: router)
     
     view.presenter = presenter
+    interactor.presenter = presenter
     router.viewController = view
     
     let navVC = UINavigationController(rootViewController: view)

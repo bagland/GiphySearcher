@@ -18,11 +18,11 @@ class GifDetailInteractor: GifDetailInteractorInputProtocol {
     Alamofire.request(url)
       .responseData { (response) in
         guard response.error == nil else {
-          self.presenter?.gotError()
+          self.presenter?.gotError(error: response.error!)
           return
         }
         guard let data = response.data else {
-          self.presenter?.gotError()
+          self.presenter?.gotError(error: GiphyError.ResponseError)
           return
         }
         self.presenter?.gotGifData(data)

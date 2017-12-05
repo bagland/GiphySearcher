@@ -12,7 +12,7 @@ import ObjectMapper
 
 enum GiphyError: Error {
   case ResponseError
-  case NetworkError
+  case NoNetworkError
 }
 
 enum NetworkResult<T>{
@@ -43,7 +43,13 @@ class GiphyService {
           let items = Mapper<GiphyEntity>().mapArray(JSONArray: data)
           completion(NetworkResult.Success(items))
         case .failure(let error):
-          completion(NetworkResult.Failure(error))
+          if let error = error as? NSError {
+            if error.code == NSURLErrorNotConnectedToInternet {
+              completion(NetworkResult.Failure(GiphyError.NoNetworkError))
+            } else {
+              completion(NetworkResult.Failure(error))
+            }
+          }
         }
       })
   }

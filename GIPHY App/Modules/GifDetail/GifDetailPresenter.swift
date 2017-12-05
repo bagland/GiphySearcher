@@ -42,7 +42,20 @@ class GifDetailPresenter: GifDetailPresenterProtocol, GifDetailInteractorOutputP
     }
   }
   
-  func gotError() {
-    view?.showError(message: Constants.unknownError)
+  func gotError(error: Error) {
+    if let giphyError = error as? GiphyError {
+      switch giphyError {
+      case .NoNetworkError:
+        debugPrint("NO NETWORK")
+        view?.showError(message: "NO NETWORK!")
+      case .ResponseError:
+        debugPrint("RESPONSE ERROR")
+        view?.showError(message: "RESPONSE ERROR")
+      }
+    } else {
+      debugPrint(error)
+      view?.showError(message: error.localizedDescription)
+    }
+//    view?.showError(message: Constants.unknownError)
   }
 }

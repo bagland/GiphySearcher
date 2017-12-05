@@ -9,7 +9,7 @@
 import Foundation
 
 protocol IndicatableView: class {
-  func showNotReachableMessage(tryAgainCompletion: @escaping(() -> Void))
+  func showNotReachableMessage()
   func showLoading()
   func hideLoading()
   func showError(message: String)

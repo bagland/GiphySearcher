@@ -33,7 +33,7 @@ protocol GifDetailInteractorInputProtocol: class {
 protocol GifDetailInteractorOutputProtocol: class {
   
   func gotGifData(_ gifData: Data)
-  func gotError()
+  func gotError(error: Error)
 }
 
 //MARK: View -

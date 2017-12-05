@@ -37,7 +37,7 @@ class ToastView: UIView {
   }
   
   private func commonInit() {
-    backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+    backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6)
     layer.cornerRadius = 5.0
     layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
     layer.shadowColor = UIColor.black.cgColor
